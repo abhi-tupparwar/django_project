@@ -14,8 +14,8 @@ ASSETS_MEDIA_DIR = os.path.abspath(os.path.join(BASE_DIR, '..'))
 
 # APPS_DIR points to the core package (project/src/apps).
 # All custom apps and newly created apps will be located in this directory.
-# APPS_DIR = os.path.join(BASE_DIR, 'apps')
-sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+APPS_DIR = os.path.join(BASE_DIR, 'apps')
+sys.path.insert(0, APPS_DIR)
 
 BUILT_IN_APPS = [
     'django.contrib.admin',
