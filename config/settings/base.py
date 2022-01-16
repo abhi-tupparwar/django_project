@@ -3,6 +3,8 @@ import os
 # CONFIG_DIR points to config package (project/src/apps/config)
 import sys
 
+from corsheaders.defaults import default_headers
+
 CONFIG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # BASE_DIR points to starting point of the projects's base directory path (<project_name>/(config, apps))
@@ -25,13 +27,17 @@ BUILT_IN_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
 THIRD_PARTY_APPS = [
     'debug_toolbar',
     'rest_framework',
+    'corsheaders',
 ]
+
 USER_DEFINED_APPS = [
     'apps.core',
 ]
+
 INSTALLED_APPS = BUILT_IN_APPS + THIRD_PARTY_APPS + USER_DEFINED_APPS
 
 BUILT_IN_MIDDLEWARE = [
@@ -43,8 +49,14 @@ BUILT_IN_MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-THIRD_PARTY_MIDDLEWARE = []
+
+THIRD_PARTY_MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
+]
+
 USER_DEFINED_MIDDLEWARE = []
+
 MIDDLEWARE = BUILT_IN_MIDDLEWARE + THIRD_PARTY_MIDDLEWARE + USER_DEFINED_MIDDLEWARE
 
 ROOT_URLCONF = 'config.urls'
@@ -88,7 +100,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangonew.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-in'
 
 TIME_ZONE = 'UTC'
 
@@ -122,10 +134,43 @@ REST_FRAMEWORK = {
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
 
     # Authentication.
-    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
+    ],
 
     # DateTime formatting
     'DATETIME_FORMAT': '%d/%m/%Y, %I:%M %p',
 }
+
+SWAGGER_SETTINGS = {
+    "PERSIST_AUTH": True,
+    "SECURITY_DEFINITIONS": {
+        # For session based auth.
+        "Basic": {"type": "basic"},
+        # For JWT token based auth.
+        "JWT": {"name": "Authorization", "type": "apiKey", "in": "header"},
+    },
+}
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'token',
+    'otp-token',
+    'cancelToken',
+    'permissions',
+]
+CORS_EXPOSE_HEADERS = [
+    'token',
+    'otp-token',
+    'cancelToken',
+    'permissions',
+]
+CORS_ALLOW_METHODS = (
+    'GET',
+    'POST',
+    'DELETE',
+    'PUT',
+    'PATCH'
+)
+SESSION_COOKIE_SAMESITE = None
