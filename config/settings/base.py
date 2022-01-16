@@ -27,6 +27,7 @@ BUILT_IN_APPS = [
 ]
 THIRD_PARTY_APPS = [
     'debug_toolbar',
+    'rest_framework',
 ]
 USER_DEFINED_APPS = [
     'apps.core',
@@ -112,3 +113,19 @@ MEDIA_ROOT = os.path.join(ASSETS_MEDIA_DIR, 'media')  # project/media
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+
+    # API Versioning.
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
+
+    # Authentication.
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+
+    # DateTime formatting
+    'DATETIME_FORMAT': '%d/%m/%Y, %I:%M %p',
+}
