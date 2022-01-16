@@ -7,17 +7,21 @@ This is a lightweight and easy to setup boilerplate project for Django.
 - flexibility to rename
 - and some awesome ✨Magic ✨
 
-> Note: `./manage.py startapp <app-name>` Every time we create a new app, we will move it inside the apps package..
+> Note: `./manage.py startapp <app-name>` Every time we create a new app, you will have to move it inside the apps package..
 
 ## Features
 
 - All Apps managed and maintined under one folder.
 - Settings are saperated in Base and Env with modular structure 
 - Core APP responsible for:
--- Custom commands
--- Base setup
+    - Custom commands
+    - Base setup
 - Integrated Debug Toolbar
-
+- Integrated Django REST framework
+- Integrated Swagger
+- Integrated Sentry 
+- Integrated WKHTML 
+- Integrated CORS 
 
 ## Tech
 
@@ -25,8 +29,19 @@ This project uses a number of open source projects to work properly:
 
 - [Django] - Python web framework that encourages rapid development
 - [Django Debug Toolbar] - configurable set of panels that display various debug information about the current request/response and when clicked, display more details about the panel's content.
+- [Django REST framework] - Django REST framework is a powerful and flexible toolkit for building Web APIs.
+- [Swagger] - Generate real Swagger/OpenAPI 2.0 specifications from a Django Rest Framework API.
+- [Sentry] - Sentry's Django integration enables automatic reporting of errors and exceptions.
+- [WKHTML] - Python 2 and 3 wrapper for wkhtmltopdf utility to convert HTML to PDF using Webkit.
+- [CORS] - A Django App that adds Cross-Origin Resource Sharing (CORS) headers to responses. This allows in-browser requests to your Django application from other origins.
 
 ## Installation
+
+> Note: Make sure you go through docs for `WKHTML` [here](https://pypi.org/project/pdfkit/)
+
+> Utils: There are some common helpers available:
+>> generate_pdf: Generated PDF object 
+>> generate_csv: Generated CSV file object
 
 Requires [Django] v4.0.1 to run.
 
@@ -66,18 +81,21 @@ To rename the project execute following command:
 |---django_project
 |   |---apps
 |   |   |---core (core app)
+|   |   |   |---utils.py
 |   |   |---...<other apps>...
 |   |   |---urls.py
 |   |
 |   |---config
 |   |   |---settings
 |   |   |   |---base.py
-|   |   |   |---env.py (ignored by git)
-|   |   |   |---env.example.py
+|   |   |   |---env.py
+|   |   |   |---.env.sample
+|   |   |   |---.env (ignored by git)
 |   |   |
 |   |   |---asgi.py
 |   |   |---urls.py
 |   |   |---wsgi.py
+|   |   |---utils.py
 |   |   |
 |   |   |static_files (all static files we use in development)
 |   |   |---base (project as a whole specific static files)
@@ -97,6 +115,7 @@ To rename the project execute following command:
 |   |---.gitignore
 |   |---manage.py
 |   |---requirements.txt
+|   |---keys.py
 |
 |---media (folder created once items were uploaded)
 |---db.sqlite3
@@ -108,6 +127,11 @@ To rename the project execute following command:
 MIT
 
    [Django]: <https://www.djangoproject.com/>
+   [Django REST framework]: <https://www.django-rest-framework.org/>
+   [Swagger]: <https://drf-yasg.readthedocs.io/en/stable/readme.html>
+   [Sentry]: <https://docs.sentry.io/platforms/python/guides/django/>
+   [WKHTML]: <https://pypi.org/project/pdfkit/>
+   [CORS]: <https://pypi.org/project/django-cors-headers/>
    [git-repo-url]: <https://github.com/abhi-tupparwar/django_project>
    [Django Debug Toolbar]: <https://django-debug-toolbar.readthedocs.io/en/latest/>
    

@@ -32,6 +32,7 @@ THIRD_PARTY_APPS = [
     'debug_toolbar',
     'rest_framework',
     'corsheaders',
+    'drf_yasg',
 ]
 
 USER_DEFINED_APPS = [
