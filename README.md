@@ -39,7 +39,7 @@ This project uses a number of open source projects to work properly:
 
 > Note: Make sure you go through docs for `WKHTML` [here](https://pypi.org/project/pdfkit/)
 
-> Utils: There are some common helpers available:
+> Utils: There are some common helpers available (apps/core/utils):
 >> generate_pdf: Generated PDF object 
 >> generate_csv: Generated CSV file object
 
